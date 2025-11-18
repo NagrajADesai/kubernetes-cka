@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+  labels:
+    env: demo
+spec:
+  replicas: 3
+  selector: # mach labels which you want to be part of replicaset
+    matchLabels:
+      env: demo # now every pod running with this label managed by replicaset
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
