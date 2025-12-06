@@ -5,7 +5,7 @@ metadata:
   labels:
     env: demo
 spec:
-  replicas: 3
+  replicas: 1
   selector: # mach labels which you want to be part of replicaset/deployment
     matchLabels:
       env: demo # now every pod running with this label managed by replicaset/deployment
