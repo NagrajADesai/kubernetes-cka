@@ -36,7 +36,7 @@ Kubernetes **Services** provide stable networking and load-balancing for Pods. S
 - When you create a Service, Kubernetes automatically creates an **Endpoint object**.
 - If Pods scale up/down or change IPs, the Endpoint list updates automatically.
 - Essentially:
-  **Service = stable access point**
-  **Endpoints = actual Pod IPs the Service is listening to**
+  - **Service = stable access point**
+  - **Endpoints = actual Pod IPs the Service is listening to**
 
 ---
