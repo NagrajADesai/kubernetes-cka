@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    env: demo
+spec:
+  replicas: 1
+
+  selector: # mach labels which you want to be part of replicaset/deployment
+    matchLabels:
+      env: demo # now every pod running with this label managed by replicaset/deployment
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+      nodeName: cka-cluster1-worker2
+      nodeSelector:
+        gpu: "false"
+      tolerations:
+        - key: "gpu"
+          operator: "Equal"
+          value: "true"
+          effect: "NoSchedule"
