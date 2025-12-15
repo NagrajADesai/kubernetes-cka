@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment2
+  labels:
+    env: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      env: demo
+  template:
+    metadata:
+      name: nginx
+      labels:
+        env: demo
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution: # change
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: disktype
+                    operator: In
+                    values:
+                      - hdd # change
